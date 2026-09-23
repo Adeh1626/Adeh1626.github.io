@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ERIT Consulting — Carbon &amp; Decarbonization Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBFCFA;
+    --bg-raised: #F2F5F1;
+    --ink: #17201C;
+    --ink-soft: #4B5750;
+    --line: #D7DED9;
+    --forest: #1F5D4C;
+    --forest-deep: #143F33;
+    --gold: #B8912A;
+    --sage: #7FA894;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121815;
+      --bg-raised: #1A2320;
+      --ink: #EAF0EC;
+      --ink-soft: #A9B8B0;
+      --line: #2B3A34;
+      --forest: #5FAF93;
+      --forest-deep: #3F8A70;
+      --gold: #D9B24C;
+      --sage: #7FA894;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121815;
+    --bg-raised: #1A2320;
+    --ink: #EAF0EC;
+    --ink-soft: #A9B8B0;
+    --line: #2B3A34;
+    --forest: #5FAF93;
+    --forest-deep: #3F8A70;
+    --gold: #D9B24C;
+    --sage: #7FA894;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display {
+    font-family: 'Space Grotesk', 'IBM Plex Sans', system-ui, sans-serif;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  section { padding: 88px 0; }
+  a { color: var(--forest-deep); }
+  @media (prefers-color-scheme: dark) { a { color: var(--forest); } }
+
+  /* Header */
+  header.top {
+    position: sticky; top: 0; top: env(safe-area-inset-top, 0px);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; max-width: 1080px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand svg { width: 30px; height: 30px; }
+  .brand span { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.05rem; }
+  nav a { margin-left: 26px; text-decoration: none; color: var(--ink-soft); font-size: 0.92rem; }
+  nav a:hover { color: var(--forest-deep); }
+
+  /* Hero */
+  .hero { padding: 76px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  @media (max-width: 780px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.1rem); line-height: 1.12; font-weight: 700; max-width: 15ch; }
+  .hero p.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 46ch; margin-top: 22px; }
+  .cta-row { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 13px 22px; border-radius: 3px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+  .btn-primary { background: var(--forest); color: #FBFCFA; }
+  .btn-primary:hover { background: var(--forest-deep); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  .chart-card { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 4px; padding: 26px 26px 18px; }
+  .chart-card .cap { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 4px; }
+  .chart-card .fig { font-family: 'Space Grotesk'; font-weight: 600; font-size: 1.5rem; margin-bottom: 14px; }
+  .bar { fill: var(--forest); }
+  .trend { fill: none; stroke: var(--gold); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .dot { fill: var(--gold); }
+  @keyframes drawline { from { stroke-dashoffset: 260; } to { stroke-dashoffset: 0; } }
+  .trend { stroke-dasharray: 260; stroke-dashoffset: 260; animation: drawline 1.4s ease-out 0.3s forwards; }
+
+  /* Section header */
+  .kicker { font-size: 0.95rem; color: var(--forest-deep); font-weight: 600; margin-bottom: 8px; }
+  @media (prefers-color-scheme: dark) { .kicker { color: var(--forest); } }
+  h2.sec-title { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 700; max-width: 22ch; }
+  .sec-intro { color: var(--ink-soft); max-width: 62ch; margin-top: 14px; font-size: 1.02rem; }
+
+  /* Services as lettered list, not cards */
+  .service { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 30px 0; border-top: 1px solid var(--line); }
+  .service:last-child { border-bottom: 1px solid var(--line); }
+  .service .letter { font-family: 'Space Grotesk'; font-size: 2rem; font-weight: 700; color: var(--sage); }
+  .service h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
+  .service ul { margin: 0; padding-left: 20px; color: var(--ink-soft); }
+  .service li { margin-bottom: 6px; }
+
+  /* Value prop */
+  .value-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 40px; margin-top: 36px; }
+  @media (max-width: 700px) { .value-list { grid-template-columns: 1fr; } }
+  .value-item { border-left: 2px solid var(--forest); padding-left: 18px; }
+  .value-item p { margin: 0; color: var(--ink-soft); }
+  .value-item h4 { font-family: 'IBM Plex Sans'; font-weight: 600; font-size: 1.02rem; margin-bottom: 6px; color: var(--ink); }
+
+  /* Approach */
+  .approach-box { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 4px; padding: 34px; margin-top: 30px; }
+  .approach-box p { color: var(--ink-soft); margin: 0 0 14px; }
+  .approach-box p:last-child { margin-bottom: 0; }
+
+  /* Founder */
+  .founder { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 700px) { .founder { grid-template-columns: 1fr; } }
+  .founder-badge { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 4px; padding: 22px; }
+  .founder-badge .name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; }
+  .founder-badge .role { color: var(--ink-soft); font-size: 0.9rem; margin-top: 4px; }
+  .founder-badge dl { margin-top: 18px; font-size: 0.85rem; }
+  .founder-badge dt { color: var(--ink-soft); margin-top: 10px; }
+  .founder-badge dd { margin: 2px 0 0; }
+  .founder-text p { color: var(--ink-soft); margin: 0 0 16px; }
+
+  /* Contact */
+  .contact-wrap { background: var(--forest-deep); color: #F4F8F6; border-radius: 6px; padding: 52px; }
+  .contact-wrap h2 { color: #FFFFFF; font-size: clamp(1.5rem, 2.6vw, 2rem); }
+  .contact-wrap p { color: #D6E5DE; max-width: 52ch; margin-top: 12px; }
+  .contact-grid { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 28px; }
+  .contact-grid .item .k { font-size: 0.8rem; color: #A9C9BC; }
+  .contact-grid .item .v { font-family: 'Space Grotesk'; font-weight: 600; margin-top: 3px; }
+  .contact-grid a { color: #FFFFFF; }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 44px; }
+  .legal { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.7; max-width: 70ch; }
+  .legal strong { color: var(--ink); }
+
+  ::selection { background: var(--gold); color: #1A1A1A; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="172" fill="none" style="stroke:var(--forest)" stroke-width="20"/>
+        <rect x="108" y="148" width="46" height="142" rx="8" style="fill:var(--forest)"/>
+        <rect x="178" y="188" width="46" height="102" rx="8" style="fill:var(--forest)"/>
+        <rect x="248" y="228" width="46" height="62" rx="8" style="fill:var(--forest)"/>
+        <polyline points="131,148 201,188 271,228" fill="none" style="stroke:var(--gold)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ERIT Consulting</span>
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#founder">Founder</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Turning carbon data into decarbonization decisions.</h1>
+        <p class="lede">ERIT Consulting helps SMEs and mid-market companies measure, report on and reduce their carbon emissions — carbon accounting, life cycle assessment, decarbonization strategy and CSRD-aligned sustainability reporting, delivered with engineering rigour.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Start a conversation</a>
+          <a class="btn btn-ghost" href="#services">See services</a>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="cap">Illustrative Scope 1–3 trajectory</div>
+        <div class="fig">−38% by target year</div>
+        <svg viewBox="0 0 260 150" width="100%" height="140">
+          <rect class="bar" x="20" y="30" width="34" height="100" rx="5"/>
+          <rect class="bar" x="90" y="55" width="34" height="75" rx="5"/>
+          <rect class="bar" x="160" y="82" width="34" height="48" rx="5"/>
+          <polyline class="trend" points="37,30 107,55 177,82"/>
+          <circle class="dot" cx="37" cy="30" r="6"/>
+          <circle class="dot" cx="177" cy="82" r="7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="kicker">What we do</div>
+      <h2 class="sec-title">Three connected services, one technical core.</h2>
+      <p class="sec-intro">Carbon accounting and decarbonization strategy form the analytical backbone; sustainability reporting turns that analysis into something a board, a lender or a customer can act on.</p>
+
+      <div class="service">
+        <div class="letter">A</div>
+        <div>
+          <h3>Carbon Accounting &amp; Life Cycle Assessment</h3>
+          <ul>
+            <li>GHG inventories (Scope 1, 2 and 3) following the GHG Protocol, delivered as an interactive dashboard on request</li>
+            <li>Product and organisational Life Cycle Assessments (screening-level)</li>
+            <li>Materials flow analysis and circularity assessments</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="letter">B</div>
+        <div>
+          <h3>Decarbonization Strategy &amp; Energy Transition</h3>
+          <ul>
+            <li>Net-zero roadmaps and Science Based Targets (SBTi) submission support</li>
+            <li>Reduction-initiative prioritisation and decarbonization ROI analysis</li>
+            <li>Feasibility studies for renewable energy transition projects</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="letter">C</div>
+        <div>
+          <h3>Sustainability &amp; ESG Reporting</h3>
+          <ul>
+            <li>CSRD-aligned or voluntary simplified (VSME) disclosures for SMEs</li>
+            <li>GRI and TCFD-aligned reporting, ESG benchmarking and dashboards</li>
+            <li>Materiality assessments and screening-level climate risk review</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="kicker">Why ERIT</div>
+      <h2 class="sec-title">Engineering rigour, not just ESG narrative.</h2>
+      <div class="value-list">
+        <div class="value-item">
+          <h4>Published research</h4>
+          <p>A co-authored, peer-reviewed life cycle engineering paper underpins the LCA work with genuine research experience.</p>
+        </div>
+        <div class="value-item">
+          <h4>Process literacy</h4>
+          <p>A chemical engineering background means real production-process understanding for industrial clients, not just reporting frameworks.</p>
+        </div>
+        <div class="value-item">
+          <h4>Built, not just analysed</h4>
+          <p>CircularBuild, a self-built material-flow tool, shows the ability to ship working analysis, not only slide decks.</p>
+        </div>
+        <div class="value-item">
+          <h4>Lean by design</h4>
+          <p>A lower cost base than a boutique agency, working to the same frameworks: GHG Protocol, CSRD, GRI, TCFD, SBTi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <div class="kicker">How we deliver</div>
+      <h2 class="sec-title">Interactive by default, human where it counts.</h2>
+      <div class="approach-box">
+        <p>Emissions dashboards and risk registers are built as shareable, filterable tools rather than static PDF decks — the same build-and-ship approach already proven through CircularBuild.</p>
+        <p>AI-assisted data cleaning and first-draft analysis speed up the groundwork, which frees time for the parts that need judgement: interpreting results, setting priorities, and defending numbers in front of a client or a board.</p>
+        <p>Target-setting, materiality calls, and what goes into a disclosure stay the consultant's responsibility — the tooling accelerates the work, it doesn't make the calls.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder">
+    <div class="wrap founder">
+      <div class="founder-badge">
+        <div class="name">Founder</div>
+        <div class="role">ERIT Consulting</div>
+      </div>
+      <div class="founder-text">
+        <p>I’m a decarbonization and carbon accounting consultant at ERIT Consulting. I help SMEs and mid-sized companies turn their emissions data into practical reduction plans.</p>
+        <p>My focus is carbon accounting and decarbonization strategy: helping organisations understand where their emissions come from and develop a roadmap to reduce them.</p>
+        <p>I also build analysis as interactive tools rather than static reports, so clients can explore their own numbers and use the insights to support decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-wrap">
+        <h2>Let's talk about your emissions data.</h2>
+        <p>Whether it's a first GHG inventory, a decarbonization roadmap, or extra analyst capacity for an existing engagement — get in touch.</p>
+        <div class="contact-grid">
+          <div class="item"><div class="k">Email</div><div class="v"><a href="mailto:contact@eritconsulting.fr">contact@eritconsulting.fr</a></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal">
+      <strong>ERIT Consulting</strong> — Entreprise individuelle (micro-entrepreneur), activité libérale non réglementée. Contact : contact@eritconsulting.fr. TVA non applicable, art. 293 B du Code général des impôts.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
